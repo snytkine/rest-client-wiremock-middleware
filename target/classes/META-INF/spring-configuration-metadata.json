@@ -1,0 +1,97 @@
+{
+  "groups": [
+    {
+      "name": "net.snytkine.rest-client-middleware.wiremock",
+      "type": "net.snytkine.wiremock_middleware.model.WireMockProperties",
+      "sourceType": "net.snytkine.wiremock_middleware.model.WireMockProperties"
+    }
+  ],
+  "properties": [
+    {
+      "name": "net.snytkine.rest-client-middleware.wiremock.asynchronous-response-enabled",
+      "type": "java.lang.Boolean",
+      "sourceType": "net.snytkine.wiremock_middleware.model.WireMockProperties"
+    },
+    {
+      "name": "net.snytkine.rest-client-middleware.wiremock.asynchronous-response-threads",
+      "type": "java.lang.Integer",
+      "sourceType": "net.snytkine.wiremock_middleware.model.WireMockProperties"
+    },
+    {
+      "name": "net.snytkine.rest-client-middleware.wiremock.container-threads",
+      "type": "java.lang.Integer",
+      "sourceType": "net.snytkine.wiremock_middleware.model.WireMockProperties"
+    },
+    {
+      "name": "net.snytkine.rest-client-middleware.wiremock.disable-optimize-xml-factories",
+      "type": "java.lang.Boolean",
+      "sourceType": "net.snytkine.wiremock_middleware.model.WireMockProperties"
+    },
+    {
+      "name": "net.snytkine.rest-client-middleware.wiremock.enabled",
+      "type": "java.lang.Boolean",
+      "sourceType": "net.snytkine.wiremock_middleware.model.WireMockProperties"
+    },
+    {
+      "name": "net.snytkine.rest-client-middleware.wiremock.global-templating",
+      "type": "java.lang.Boolean",
+      "sourceType": "net.snytkine.wiremock_middleware.model.WireMockProperties"
+    },
+    {
+      "name": "net.snytkine.rest-client-middleware.wiremock.gzip-disabled",
+      "type": "java.lang.Boolean",
+      "sourceType": "net.snytkine.wiremock_middleware.model.WireMockProperties"
+    },
+    {
+      "name": "net.snytkine.rest-client-middleware.wiremock.journal-disabled",
+      "type": "java.lang.Boolean",
+      "sourceType": "net.snytkine.wiremock_middleware.model.WireMockProperties"
+    },
+    {
+      "name": "net.snytkine.rest-client-middleware.wiremock.mappings-class-path",
+      "type": "java.lang.String",
+      "sourceType": "net.snytkine.wiremock_middleware.model.WireMockProperties"
+    },
+    {
+      "name": "net.snytkine.rest-client-middleware.wiremock.max-request-journal-entries",
+      "type": "java.lang.Integer",
+      "sourceType": "net.snytkine.wiremock_middleware.model.WireMockProperties"
+    },
+    {
+      "name": "net.snytkine.rest-client-middleware.wiremock.max-template-cache-entries",
+      "type": "java.lang.Long",
+      "sourceType": "net.snytkine.wiremock_middleware.model.WireMockProperties"
+    },
+    {
+      "name": "net.snytkine.rest-client-middleware.wiremock.mock-response-header",
+      "type": "java.lang.String",
+      "sourceType": "net.snytkine.wiremock_middleware.model.WireMockProperties"
+    },
+    {
+      "name": "net.snytkine.rest-client-middleware.wiremock.proxy-pass-through",
+      "type": "java.lang.Boolean",
+      "sourceType": "net.snytkine.wiremock_middleware.model.WireMockProperties"
+    },
+    {
+      "name": "net.snytkine.rest-client-middleware.wiremock.root-directory",
+      "type": "java.lang.String",
+      "sourceType": "net.snytkine.wiremock_middleware.model.WireMockProperties"
+    },
+    {
+      "name": "net.snytkine.rest-client-middleware.wiremock.stub-cors-enabled",
+      "type": "java.lang.Boolean",
+      "sourceType": "net.snytkine.wiremock_middleware.model.WireMockProperties"
+    },
+    {
+      "name": "net.snytkine.rest-client-middleware.wiremock.stub-request-logging-disabled",
+      "type": "java.lang.Boolean",
+      "sourceType": "net.snytkine.wiremock_middleware.model.WireMockProperties"
+    },
+    {
+      "name": "net.snytkine.rest-client-middleware.wiremock.templating-enabled",
+      "type": "java.lang.Boolean",
+      "sourceType": "net.snytkine.wiremock_middleware.model.WireMockProperties"
+    }
+  ],
+  "hints": []
+}
