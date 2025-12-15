@@ -1,0 +1,60 @@
+# Maven
+/target/
+/dependency-reduced-pom.xml
+/release.properties
+/pom.xml.tag
+/pom.xml.releaseBackup
+/pom.xml.versionsBackup
+
+# Maven wrapper
+/.mvn/wrapper/maven-wrapper.jar
+.mvn/timing.properties
+
+# IntelliJ
+.idea/
+*.iml
+*.ipr
+*.iws
+out/
+
+# VS Code
+/.vscode/
+
+# Eclipse
+.classpath
+.project
+.settings/
+
+# Build / packaging
+*.class
+*.jar
+*.war
+*.ear
+
+# Logs
+*.log
+logs/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Temporary / editors
+*~
+*.swp
+._*
+
+# Test / coverage
+coverage/
+*.exec
+
+# Node
+node_modules/
+
+# Generated metadata
+/target/
+target/
+
+# Others
+*.log
+.idea/
