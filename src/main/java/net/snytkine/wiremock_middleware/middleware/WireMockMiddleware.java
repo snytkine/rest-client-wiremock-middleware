@@ -25,10 +25,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
-import java.util.concurrent.locks.*;
+import lombok.extern.slf4j.Slf4j;
 import net.snytkine.wiremock_middleware.model.WireMockProperties;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpRequest;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.MediaType;
@@ -38,9 +36,8 @@ import org.springframework.http.client.ClientHttpResponse;
 import org.springframework.lang.NonNull;
 import org.springframework.web.util.UriComponentsBuilder;
 
+@Slf4j
 public class WireMockMiddleware implements ClientHttpRequestInterceptor {
-
-  private static final Logger log = LoggerFactory.getLogger(WireMockMiddleware.class);
 
   private final DirectCallHttpServer directCallHttpServer;
   private final WireMockProperties properties;
@@ -68,9 +65,20 @@ public class WireMockMiddleware implements ClientHttpRequestInterceptor {
         directCallHttpServer.stubRequest(wiremockRequest);
 
     if (wiremockResponse.wasConfigured()) {
-      return new WiremockClientHttpResponse(wiremockResponse, properties);
+      log.trace("Returning mock response");
+      var ret = new WiremockClientHttpResponse(wiremockResponse);
+      String mockKey = properties.getMockResponseHeader();
+      if (mockKey != null) {
+        var origHeaders = ret.getHeaders();
+        var newHears = new org.springframework.http.HttpHeaders(origHeaders);
+        log.trace("Adding mock header: " + mockKey);
+        newHears.add(mockKey, "mocked-response");
+        ret.setHeaders(newHears);
+      }
+      return ret;
     }
 
+    log.info("Returning real response");
     return execution.execute(request, body);
   }
 
@@ -256,13 +264,16 @@ public class WireMockMiddleware implements ClientHttpRequestInterceptor {
 
   private static class WiremockClientHttpResponse implements ClientHttpResponse {
     private final com.github.tomakehurst.wiremock.http.Response wiremockResponse;
-    private WireMockProperties configuration;
+
+    private org.springframework.http.HttpHeaders ownHeaders;
+
+    public void setHeaders(org.springframework.http.HttpHeaders headers) {
+      this.ownHeaders = headers;
+    }
 
     public WiremockClientHttpResponse(
-        com.github.tomakehurst.wiremock.http.Response wiremockResponse,
-        WireMockProperties configuration) {
+        com.github.tomakehurst.wiremock.http.Response wiremockResponse) {
       this.wiremockResponse = wiremockResponse;
-      this.configuration = configuration;
     }
 
     @Override
@@ -292,6 +303,10 @@ public class WireMockMiddleware implements ClientHttpRequestInterceptor {
 
     @Override
     public @NonNull org.springframework.http.HttpHeaders getHeaders() {
+      if (ownHeaders != null) {
+        return ownHeaders;
+      }
+
       org.springframework.http.HttpHeaders headers = new org.springframework.http.HttpHeaders();
       if (wiremockResponse.getHeaders() != null) {
         for (HttpHeader header : wiremockResponse.getHeaders().all()) {
@@ -301,10 +316,6 @@ public class WireMockMiddleware implements ClientHttpRequestInterceptor {
             headers.addAll(key, values);
           }
         }
-      }
-      String mockKey = configuration.getMockResponseHeader();
-      if (mockKey != null) {
-        headers.set(mockKey, "mocked-response");
       }
 
       return headers;
