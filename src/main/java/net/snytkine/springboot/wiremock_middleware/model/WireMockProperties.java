@@ -4,7 +4,7 @@ import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 
-@ConfigurationProperties(prefix = "net.snytkine.rest-client-middleware.wiremock")
+@ConfigurationProperties(prefix = "net.snytkine.rest-client-wiremock-interceptor")
 @Component
 @Data
 public class WireMockProperties {

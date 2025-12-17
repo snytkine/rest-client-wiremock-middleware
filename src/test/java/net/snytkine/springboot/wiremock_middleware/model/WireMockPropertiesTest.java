@@ -88,4 +88,33 @@ class WireMockPropertiesTest {
     assertTrue(s.contains("mockResponseHeader=h") || s.contains("mockResponseHeader= h"));
     assertTrue(s.contains("mockResponseHeaderValue=v") || s.contains("mockResponseHeaderValue= v"));
   }
+
+  @Test
+  void equalsHashCodeVariants() {
+    WireMockProperties a = new WireMockProperties();
+    WireMockProperties b = new WireMockProperties();
+
+    // reflexive and symmetric
+    assertEquals(a, a);
+    assertEquals(a, b);
+    assertEquals(b, a);
+    assertEquals(a.hashCode(), b.hashCode());
+
+    // unequal to other types and null
+    assertNotEquals(a, "some string");
+    assertNotEquals(a, null);
+
+    // change a field and verify inequality and hash change
+    b.setContainerThreads(2);
+    assertNotEquals(a, b);
+    assertNotEquals(a.hashCode(), b.hashCode());
+
+    // restore equality and verify equals handles null fields gracefully
+    b.setContainerThreads(1);
+    a.setMockResponseHeader(null);
+    b.setMockResponseHeader(null);
+    a.setMockResponseHeaderValue(null);
+    b.setMockResponseHeaderValue(null);
+    assertEquals(a, b);
+  }
 }

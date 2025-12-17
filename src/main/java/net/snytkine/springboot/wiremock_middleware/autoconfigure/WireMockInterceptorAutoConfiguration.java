@@ -11,7 +11,7 @@ import org.springframework.context.annotation.Import;
 @AutoConfiguration
 @EnableConfigurationProperties(WireMockProperties.class)
 @ConditionalOnProperty(
-    prefix = "net.snytkine.rest-client-middleware.wiremock",
+    prefix = "net.snytkine.rest-client-wiremock-interceptor",
     name = "enabled",
     havingValue = "true")
 @Import({WireMockConfigurationFactory.class, WireMockInterceptorFactory.class})
