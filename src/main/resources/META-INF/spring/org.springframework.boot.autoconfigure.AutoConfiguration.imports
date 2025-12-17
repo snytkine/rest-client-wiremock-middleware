@@ -1,1 +1,1 @@
-net.snytkine.wiremock_middleware.autoconfigure.WireMockMiddlewareAutoConfiguration
+net.snytkine.springboot.wiremock_middleware.autoconfigure.WireMockInterceptorAutoConfiguration

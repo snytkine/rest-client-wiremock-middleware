@@ -1,4 +1,4 @@
-package net.snytkine.wiremock_middleware.model;
+package net.snytkine.springboot.wiremock_middleware.model;
 
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -25,4 +25,5 @@ public class WireMockProperties {
   private String mappingsClassPath;
   private boolean proxyPassThrough;
   private String mockResponseHeader;
+  private String mockResponseHeaderValue;
 }

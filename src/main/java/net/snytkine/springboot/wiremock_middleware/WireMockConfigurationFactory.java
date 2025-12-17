@@ -1,17 +1,14 @@
-package net.snytkine.wiremock_middleware.middleware;
+package net.snytkine.springboot.wiremock_middleware;
 
 import com.github.tomakehurst.wiremock.core.WireMockConfiguration;
 import java.util.Optional;
-import net.snytkine.wiremock_middleware.model.WireMockProperties;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import lombok.extern.slf4j.Slf4j;
+import net.snytkine.springboot.wiremock_middleware.model.WireMockProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-@ConditionalOnProperty(
-    prefix = "net.snytkine.rest-client-middleware.wiremock",
-    name = "enabled",
-    havingValue = "true")
+@Slf4j
 public class WireMockConfigurationFactory {
 
   private final WireMockProperties wireMockProperties;
@@ -53,11 +50,16 @@ public class WireMockConfigurationFactory {
         .ifPresent(v -> wireMockConfiguration.usingFilesUnderClasspath(v));
     wireMockConfiguration.proxyPassThrough(wireMockProperties.isProxyPassThrough());
 
-    String[] myextensions = {"org.wiremock.RandomExtension"};
+    // Add org.wiremock.RandomExtension if available on the classpath
+    try {
+      Class.forName("org.wiremock.RandomExtension");
+      log.trace("Registering Faker Extension org.wiremock.RandomExtension");
+      wireMockConfiguration.extensions(new String[] {"org.wiremock.RandomExtension"});
+    } catch (ClassNotFoundException e) {
+      log.trace("org.wiremock.RandomExtension not found on classpath; skipping registration");
+    }
 
     wireMockConfiguration.trustAllProxyTargets(true);
-    wireMockConfiguration.requestJournalDisabled();
-    wireMockConfiguration.extensions(myextensions);
 
     return wireMockConfiguration;
   }

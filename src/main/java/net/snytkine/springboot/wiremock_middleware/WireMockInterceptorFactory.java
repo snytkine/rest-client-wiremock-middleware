@@ -1,16 +1,16 @@
-package net.snytkine.wiremock_middleware.middleware;
+package net.snytkine.springboot.wiremock_middleware;
 
 import com.github.tomakehurst.wiremock.core.WireMockConfiguration;
-import net.snytkine.wiremock_middleware.model.WireMockProperties;
+import net.snytkine.springboot.wiremock_middleware.model.WireMockProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-public class WireMockMiddlewareFactory {
+public class WireMockInterceptorFactory {
 
   @Bean
-  public WireMockMiddleware createWireMockMiddleware(
+  public WireMockInterceptor wireMockInterceptor(
       WireMockConfiguration wireMockConfiguration, WireMockProperties properties) {
-    return new WireMockMiddleware(wireMockConfiguration, properties);
+    return new WireMockInterceptor(wireMockConfiguration, properties);
   }
 }

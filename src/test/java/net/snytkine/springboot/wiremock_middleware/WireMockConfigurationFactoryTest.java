@@ -1,9 +1,9 @@
-package net.snytkine.wiremock_middleware.middleware;
+package net.snytkine.springboot.wiremock_middleware;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 import com.github.tomakehurst.wiremock.core.WireMockConfiguration;
-import net.snytkine.wiremock_middleware.model.WireMockProperties;
+import net.snytkine.springboot.wiremock_middleware.model.WireMockProperties;
 import org.junit.jupiter.api.Test;
 
 class WireMockConfigurationFactoryTest {
