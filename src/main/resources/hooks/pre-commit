@@ -1,0 +1,9 @@
+#!/bin/bash
+# Run a Maven goal (e.g., spotless:apply or validate)
+# Using ./mvnw (Maven wrapper) is recommended for consistency
+# mvn spotless:check
+mvn validate
+if [ $? -ne 0 ]; then
+  echo "Maven build failed. Aborting commit."
+  exit 1
+fi

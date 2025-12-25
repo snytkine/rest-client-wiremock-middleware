@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
 		<version>3.3.1</version>
-		<relativePath/> <!-- lookup parent from repository -->
+		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>net.snytkine</groupId>
 	<artifactId>wiremock-interceptor-spring-boot-starter</artifactId>
@@ -34,27 +35,28 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
-            <scope>provided</scope>
+			<scope>provided</scope>
 		</dependency>
 
 		<dependency>
 			<groupId>org.wiremock</groupId>
 			<artifactId>wiremock</artifactId>
 			<version>${wiremock.version}</version>
+
 		</dependency>
 
-        <dependency>
-            <groupId>org.wiremock.extensions</groupId>
-            <artifactId>wiremock-faker-extension</artifactId>
-            <version>0.2.0</version>
-            <scope>optional</scope>
-        </dependency>
+		<dependency>
+			<groupId>org.wiremock.extensions</groupId>
+			<artifactId>wiremock-faker-extension</artifactId>
+			<version>0.2.0</version>
+			<scope>optional</scope>
+		</dependency>
 
-			<dependency>
-				<groupId>org.projectlombok</groupId>
-				<artifactId>lombok</artifactId>
-				<version>${lombok.version}</version>
-			</dependency>
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<version>${lombok.version}</version>
+		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-configuration-processor</artifactId>
@@ -78,7 +80,8 @@
 
 	<build>
 		<plugins>
-			<!-- Configure annotation processors so Lombok and Spring config processor run during compile -->
+			<!-- Configure annotation processors so Lombok and Spring config processor run during
+			compile -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
@@ -144,37 +147,84 @@
 				</executions>
 			</plugin>
 
-			<!-- No spring-boot-maven-plugin because this is a library -->
-				<!-- Spotless code formatting plugin (enforces formatting compatible with Spring guidelines) -->
-				<plugin>
-					<groupId>com.diffplug.spotless</groupId>
-					<artifactId>spotless-maven-plugin</artifactId>
-					<version>3.1.0</version>
-					<configuration>
-						<java>
-							<googleJavaFormat>
-								<version>1.17.0</version>
-							</googleJavaFormat>
-						</java>
-					</configuration>
-						<executions>
-							<execution>
-								<id>spotless-apply</id>
-								<goals>
-									<goal>apply</goal>
-								</goals>
-								<phase>validate</phase>
-							</execution>
-							<execution>
-								<id>spotless-check</id>
-								<goals>
-									<goal>check</goal>
-								</goals>
-								<phase>validate</phase>
-							</execution>
-						</executions>
-				</plugin>
-			</plugins>
-	</build>
+			<!-- Spotless code formatting plugin (enforces formatting compatible with Spring
+			guidelines) -->
+			<plugin>
+				<groupId>com.diffplug.spotless</groupId>
+				<artifactId>spotless-maven-plugin</artifactId>
+				<version>3.1.0</version>
+				<configuration>
+					<java>
+						<googleJavaFormat>
+							<version>1.17.0</version>
+						</googleJavaFormat>
+						<importOrder />
+						<removeUnusedImports />
+						<formatAnnotations />
+					</java>
+				</configuration>
+				<executions>
+					<execution>
+						<id>spotless-apply</id>
+						<goals>
+							<goal>apply</goal>
+						</goals>
+						<phase>process-sources</phase>
+					</execution>
+					<execution>
+						<id>spotless-check</id>
+						<goals>
+							<goal>check</goal>
+						</goals>
+						<phase>validate</phase>
+					</execution>
+				</executions>
+			</plugin>
 
+			<!-- Pre-commit Maven Plugin -->
+			<plugin>
+				<groupId>com.rudikershaw.gitbuildhook</groupId>
+				<artifactId>git-build-hook-maven-plugin</artifactId>
+				<version>3.6.0</version> <!-- Use the latest version -->
+				<executions>
+					<execution>
+						<goals>
+							<goal>configure</goal>
+							<goal>install</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<gitConfig>
+						<!--
+                      The location of the directory containing your hook scripts
+                      relative to the project root.
+                    -->
+						<core.hooksPath>src/main/resources/hooks/</core.hooksPath>
+					</gitConfig>
+					<hooks>
+						<hook>
+							<name>pre-commit</name>
+							<!--
+                          Point to the script file you created.
+                          The plugin copies this into .git/hooks.
+                        -->
+							<script>src/main/resources/hooks/pre-commit</script>
+						</hook>
+					</hooks>
+				</configuration>
+			</plugin>
+
+			<!-- Git Commit ID Plugin to generate git.properties file -->
+			<plugin>
+				<groupId>pl.project13.maven</groupId>
+				<artifactId>git-commit-id-plugin</artifactId>
+				<version>4.9.10</version>
+				<configuration>
+					<generateGitPropertiesFile>true</generateGitPropertiesFile>
+					<generateGitPropertiesFilename>${project.build.outputDirectory}/git.properties</generateGitPropertiesFilename>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
 </project>
