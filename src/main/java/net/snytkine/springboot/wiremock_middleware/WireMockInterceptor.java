@@ -71,6 +71,19 @@ public class WireMockInterceptor implements ClientHttpRequestInterceptor {
   private final DirectCallHttpServer directCallHttpServer;
   private final WireMockProperties properties;
 
+  /**
+   * Constructs a new {@code WireMockInterceptor} with the specified WireMock configuration and
+   * properties.
+   *
+   * <p>This constructor initializes a {@link DirectCallHttpServer} to enable in-process request
+   * interception and matching against WireMock stubs. It also configures the interceptor with
+   * properties such as mock response headers and other configuration options.
+   *
+   * @param config the WireMock configuration used to set up the underlying WireMock server
+   * @param properties the configuration properties for the WireMock interceptor, including mock
+   *     response header settings
+   * @throws IllegalArgumentException if either {@code config} or {@code properties} is null
+   */
   public WireMockInterceptor(
       WireMockConfiguration wireMockConfiguration, WireMockProperties properties) {
     this.properties = properties;

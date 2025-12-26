@@ -4,11 +4,26 @@ import com.github.tomakehurst.wiremock.core.WireMockConfiguration;
 import net.snytkine.springboot.wiremock_middleware.model.WireMockProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.annotation.Order;
 
 @Configuration
+/**
+ * Configuration class responsible for creating and configuring WireMock interceptors. This class
+ * sets up the necessary components for integrating WireMock into the Spring Boot application to
+ * enable mocking of external HTTP services during testing and development.
+ */
 public class WireMockInterceptorFactory {
 
   @Bean
+  @Order(50)
+  /**
+   * Creates and configures a WireMockInterceptor bean that handles HTTP request interception and
+   * response mocking for integration testing purposes.
+   *
+   * @param wireMockProperties the configuration properties for WireMock
+   * @param wireMockConfiguration the WireMock configuration instance
+   * @return a configured WireMockInterceptor instance
+   */
   public WireMockInterceptor wireMockInterceptor(
       WireMockConfiguration wireMockConfiguration, WireMockProperties properties) {
     return new WireMockInterceptor(wireMockConfiguration, properties);

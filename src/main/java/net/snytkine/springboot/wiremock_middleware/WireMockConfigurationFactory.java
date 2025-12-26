@@ -57,7 +57,8 @@ public class WireMockConfigurationFactory {
         .ifPresent(v -> wireMockConfiguration.stubCorsEnabled(v));
     Optional.ofNullable(wireMockProperties.getStubRequestLoggingDisabled())
         .ifPresent(v -> wireMockConfiguration.stubRequestLoggingDisabled(v));
-    // templatingEnabled and proxyPassThrough are primitive booleans on properties; call directly
+    // templatingEnabled and proxyPassThrough are primitive booleans on properties;
+    // call directly
     wireMockConfiguration.templatingEnabled(wireMockProperties.isTemplatingEnabled());
     Optional.ofNullable(wireMockProperties.getMappingsClassPath())
         .ifPresent(v -> wireMockConfiguration.usingFilesUnderClasspath(v));
