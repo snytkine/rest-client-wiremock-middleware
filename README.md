@@ -1,4 +1,4 @@
-# WireMock Middleware for Spring Boot
+# WireMock Middleware for Spring Boot RestClient
 
 ## Project Overview
 
