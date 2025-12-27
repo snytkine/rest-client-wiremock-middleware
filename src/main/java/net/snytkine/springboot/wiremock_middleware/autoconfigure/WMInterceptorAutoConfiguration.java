@@ -1,7 +1,7 @@
 package net.snytkine.springboot.wiremock_middleware.autoconfigure;
 
+import net.snytkine.springboot.wiremock_middleware.WMInterceptorFactory;
 import net.snytkine.springboot.wiremock_middleware.WireMockConfigurationFactory;
-import net.snytkine.springboot.wiremock_middleware.WireMockInterceptorFactory;
 import net.snytkine.springboot.wiremock_middleware.model.WireMockProperties;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
@@ -14,5 +14,5 @@ import org.springframework.context.annotation.Import;
     prefix = "net.snytkine.rest-client-wiremock-interceptor",
     name = "enabled",
     havingValue = "true")
-@Import({WireMockConfigurationFactory.class, WireMockInterceptorFactory.class})
-public class WireMockInterceptorAutoConfiguration {}
+@Import({WireMockConfigurationFactory.class, WMInterceptorFactory.class})
+public class WMInterceptorAutoConfiguration {}

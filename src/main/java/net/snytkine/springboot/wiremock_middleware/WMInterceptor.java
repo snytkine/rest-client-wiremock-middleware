@@ -66,7 +66,7 @@ import org.springframework.web.util.UriComponentsBuilder;
  * @see WireMockProperties
  */
 @Slf4j
-public class WireMockInterceptor implements ClientHttpRequestInterceptor {
+public class WMInterceptor implements ClientHttpRequestInterceptor {
 
   private final DirectCallHttpServer directCallHttpServer;
   private final WireMockProperties properties;
@@ -84,8 +84,7 @@ public class WireMockInterceptor implements ClientHttpRequestInterceptor {
    *     response header settings
    * @throws IllegalArgumentException if either {@code config} or {@code properties} is null
    */
-  public WireMockInterceptor(
-      WireMockConfiguration wireMockConfiguration, WireMockProperties properties) {
+  public WMInterceptor(WireMockConfiguration wireMockConfiguration, WireMockProperties properties) {
     this.properties = properties;
     DirectCallHttpServerFactory wireMockServer = new DirectCallHttpServerFactory();
     wireMockConfiguration.httpServerFactory(wireMockServer);

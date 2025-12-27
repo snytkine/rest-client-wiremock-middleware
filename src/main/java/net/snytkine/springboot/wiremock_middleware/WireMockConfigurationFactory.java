@@ -64,15 +64,8 @@ public class WireMockConfigurationFactory {
         .ifPresent(v -> wireMockConfiguration.usingFilesUnderClasspath(v));
     wireMockConfiguration.proxyPassThrough(wireMockProperties.isProxyPassThrough());
 
-    // Add org.wiremock.RandomExtension if available on the classpath
-    try {
-      Class.forName("org.wiremock.RandomExtension");
-      log.trace("Registering Faker Extension org.wiremock.RandomExtension");
-      wireMockConfiguration.extensions(new String[] {"org.wiremock.RandomExtension"});
-    } catch (ClassNotFoundException e) {
-      log.trace("org.wiremock.RandomExtension not found on classpath; skipping registration");
-    }
-
+    log.trace("Registering Faker Extension org.wiremock.RandomExtension...");
+    wireMockConfiguration.extensions(new String[] {"org.wiremock.RandomExtension"});
     wireMockConfiguration.trustAllProxyTargets(true);
 
     return wireMockConfiguration;

@@ -45,9 +45,8 @@ class WireMockInterceptorTest {
     props.setMockResponseHeader("X-MOCK");
     props.setMockResponseHeaderValue("mock-middleware");
 
-    WireMockInterceptor interceptor =
-        new WireMockInterceptor(
-            new com.github.tomakehurst.wiremock.core.WireMockConfiguration(), props);
+    WMInterceptor interceptor =
+        new WMInterceptor(new com.github.tomakehurst.wiremock.core.WireMockConfiguration(), props);
 
     // mock the DirectCallHttpServer to return a configured response
     DirectCallHttpServer mockServer = mock(DirectCallHttpServer.class);
@@ -60,7 +59,7 @@ class WireMockInterceptorTest {
     when(mockServer.stubRequest(any())).thenReturn(mockResponse);
 
     // inject the mock server into the interceptor
-    java.lang.reflect.Field f = WireMockInterceptor.class.getDeclaredField("directCallHttpServer");
+    java.lang.reflect.Field f = WMInterceptor.class.getDeclaredField("directCallHttpServer");
     f.setAccessible(true);
     f.set(interceptor, mockServer);
 
@@ -104,7 +103,7 @@ class WireMockInterceptorTest {
 
     Class<?> adapterCls =
         Class.forName(
-            "net.snytkine.springboot.wiremock_middleware.WireMockInterceptor$SpringHttpRequestAdapter");
+            "net.snytkine.springboot.wiremock_middleware.WMInterceptor$SpringHttpRequestAdapter");
     java.lang.reflect.Constructor<?> ctor =
         adapterCls.getDeclaredConstructor(HttpRequest.class, byte[].class);
     ctor.setAccessible(true);
@@ -137,7 +136,7 @@ class WireMockInterceptorTest {
 
     Class<?> respCls =
         Class.forName(
-            "net.snytkine.springboot.wiremock_middleware.WireMockInterceptor$WiremockClientHttpResponse");
+            "net.snytkine.springboot.wiremock_middleware.WMInterceptor$WiremockClientHttpResponse");
     java.lang.reflect.Constructor<?> ctor = respCls.getDeclaredConstructor(Response.class);
     ctor.setAccessible(true);
     org.springframework.http.client.ClientHttpResponse resp =
@@ -172,7 +171,7 @@ class WireMockInterceptorTest {
 
     Class<?> adapterCls =
         Class.forName(
-            "net.snytkine.springboot.wiremock_middleware.WireMockInterceptor$SpringHttpRequestAdapter");
+            "net.snytkine.springboot.wiremock_middleware.WMInterceptor$SpringHttpRequestAdapter");
     java.lang.reflect.Constructor<?> ctor =
         adapterCls.getDeclaredConstructor(HttpRequest.class, byte[].class);
     ctor.setAccessible(true);
@@ -237,7 +236,7 @@ class WireMockInterceptorTest {
 
     Class<?> adapterCls =
         Class.forName(
-            "net.snytkine.springboot.wiremock_middleware.WireMockInterceptor$SpringHttpRequestAdapter");
+            "net.snytkine.springboot.wiremock_middleware.WMInterceptor$SpringHttpRequestAdapter");
     java.lang.reflect.Constructor<?> ctor =
         adapterCls.getDeclaredConstructor(HttpRequest.class, byte[].class);
     ctor.setAccessible(true);
@@ -250,7 +249,8 @@ class WireMockInterceptorTest {
 
     assertTrue(adapter.containsHeader("H"));
     assertTrue(adapter.getAllHeaderKeys().contains("H"));
-    // header() returns only the first header value (adapter uses getFirst internally)
+    // header() returns only the first header value (adapter uses getFirst
+    // internally)
     com.github.tomakehurst.wiremock.http.HttpHeader header = adapter.header("H");
     assertEquals(java.util.List.of("a"), header.values());
 
@@ -284,7 +284,7 @@ class WireMockInterceptorTest {
 
     Class<?> adapterCls =
         Class.forName(
-            "net.snytkine.springboot.wiremock_middleware.WireMockInterceptor$SpringHttpRequestAdapter");
+            "net.snytkine.springboot.wiremock_middleware.WMInterceptor$SpringHttpRequestAdapter");
     java.lang.reflect.Constructor<?> ctor =
         adapterCls.getDeclaredConstructor(HttpRequest.class, byte[].class);
     ctor.setAccessible(true);
@@ -319,7 +319,7 @@ class WireMockInterceptorTest {
 
     Class<?> adapterCls =
         Class.forName(
-            "net.snytkine.springboot.wiremock_middleware.WireMockInterceptor$SpringHttpRequestAdapter");
+            "net.snytkine.springboot.wiremock_middleware.WMInterceptor$SpringHttpRequestAdapter");
     java.lang.reflect.Constructor<?> ctor =
         adapterCls.getDeclaredConstructor(HttpRequest.class, byte[].class);
     ctor.setAccessible(true);
@@ -351,7 +351,7 @@ class WireMockInterceptorTest {
 
     Class<?> respCls =
         Class.forName(
-            "net.snytkine.springboot.wiremock_middleware.WireMockInterceptor$WiremockClientHttpResponse");
+            "net.snytkine.springboot.wiremock_middleware.WMInterceptor$WiremockClientHttpResponse");
     java.lang.reflect.Constructor<?> ctor = respCls.getDeclaredConstructor(Response.class);
     ctor.setAccessible(true);
     org.springframework.http.client.ClientHttpResponse resp =
@@ -369,16 +369,15 @@ class WireMockInterceptorTest {
   @Test
   void interceptForwardsToExecutionWhenNoMock() throws Exception {
     WireMockProperties props = new WireMockProperties();
-    WireMockInterceptor interceptor =
-        new WireMockInterceptor(
-            new com.github.tomakehurst.wiremock.core.WireMockConfiguration(), props);
+    WMInterceptor interceptor =
+        new WMInterceptor(new com.github.tomakehurst.wiremock.core.WireMockConfiguration(), props);
 
     DirectCallHttpServer mockServer = mock(DirectCallHttpServer.class);
     Response mockResponse = mock(Response.class);
     when(mockResponse.wasConfigured()).thenReturn(false);
     when(mockServer.stubRequest(any())).thenReturn(mockResponse);
 
-    java.lang.reflect.Field f = WireMockInterceptor.class.getDeclaredField("directCallHttpServer");
+    java.lang.reflect.Field f = WMInterceptor.class.getDeclaredField("directCallHttpServer");
     f.setAccessible(true);
     f.set(interceptor, mockServer);
 
