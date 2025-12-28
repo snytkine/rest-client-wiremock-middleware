@@ -1,4 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!--
+
+    /*
+     * Copyright 2025 - ${year} Dmitri Snytkine. All rights reserved.
+     *
+     * Licensed under the Apache License, Version 2.0 (the "License");
+     * you may not use this file except in compliance with the License.
+     * You may obtain a copy of the License at
+     *
+     *     http://www.apache.org/licenses/LICENSE-2.0
+     *
+     * Unless required by applicable law or agreed to in writing, software
+     * distributed under the License is distributed on an "AS IS" BASIS,
+     * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     * See the License for the specific language governing permissions and
+     * limitations under the License.
+     */
+
+-->
 <project xmlns="http://maven.apache.org/POM/4.0.0"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
@@ -9,11 +28,41 @@
 		<version>3.3.1</version>
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>net.snytkine</groupId>
+	<groupId>io.github.snytkine</groupId>
 	<artifactId>wiremock-interceptor-spring-boot-starter</artifactId>
+	<packaging>jar</packaging>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>wiremock-rest-client-interceptor-spring-boot-starter</name>
 	<description>Spring Boot Starter for WireMock RestClient Interceptor</description>
+	<developers>
+		<developer>
+			<name>Dmitri Snytkine</name>
+			<email>d.snytkine@gmail.com</email>
+			<organization>Snytkine</organization>
+			<organizationUrl>https://snytkine.github.io</organizationUrl>
+		</developer>
+	</developers>
+	<licenses>
+		<license>
+			<name>Apache 2</name>
+			<url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+			<distribution>repo</distribution>
+		</license>
+	</licenses>
+	<scm>
+		<url>https://github.com/snytkine/rest-client-wiremock-middleware</url>
+		<connection>scm:git:git://github.com/mstahv/sliders.git</connection>
+		<!--
+            developerConnection is used by e.g. maven-release-plugin to push changes to the repo.
+            Some "newbies" might be better off with https, I always go with ssh 😎
+        -->
+		<developerConnection>scm:git:ssh://git@github.com:/mstahv/sliders.git</developerConnection>
+		<tag>HEAD</tag>
+	</scm>
+	<issueManagement>
+		<system>GitHub</system>
+		<url>https://github.com/snytkine/rest-client-wiremock-middleware/issues</url>
+	</issueManagement>
 	<properties>
 		<java.version>21</java.version>
 		<lombok.version>1.18.30</lombok.version>
@@ -259,6 +308,28 @@
 						<id>attach-javadocs</id>
 						<goals>
 							<goal>jar</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+
+			<plugin>
+				<groupId>com.mycila</groupId>
+				<artifactId>license-maven-plugin</artifactId>
+				<version>3.0</version>
+				<configuration>
+					<header>${project.basedir}/src/main/resources/license-header.txt</header>
+					<includes>
+						<include>**/*.java</include>
+						<include>**/*.xml</include>
+						<include>**/*.properties</include>
+					</includes>
+				</configuration>
+				<executions>
+					<execution>
+						<goals>
+							<goal>check</goal>
+							<goal>format</goal>
 						</goals>
 					</execution>
 				</executions>
