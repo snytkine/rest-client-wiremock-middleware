@@ -1,19 +1,16 @@
-package net.snytkine.springboot.wiremock_middleware;
+package net.snytkine.springboot.wm_interceptor;
 
 import com.github.tomakehurst.wiremock.core.WireMockConfiguration;
 import java.util.Optional;
 import lombok.extern.slf4j.Slf4j;
-import net.snytkine.springboot.wiremock_middleware.model.WireMockProperties;
+import net.snytkine.springboot.wm_interceptor.model.WireMockProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
 
 @Configuration
 @Slf4j
-/**
- * Configuration class for setting up WireMock middleware. This class provides bean definitions for
- * configuring WireMock server with custom properties and settings.
- */
+/** Factory class responsible for creating and configuring WireMockConfiguration. */
 public class WireMockConfigurationFactory {
 
   private final WireMockProperties wireMockProperties;

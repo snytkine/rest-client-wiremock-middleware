@@ -1,4 +1,4 @@
-package net.snytkine.springboot.wiremock_middleware;
+package net.snytkine.springboot.wm_interceptor;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
@@ -11,14 +11,14 @@ import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.net.URI;
 import java.nio.charset.StandardCharsets;
-import net.snytkine.springboot.wiremock_middleware.model.WireMockProperties;
+import net.snytkine.springboot.wm_interceptor.model.WireMockProperties;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpRequest;
 import org.springframework.http.client.ClientHttpRequestExecution;
 import org.springframework.http.client.ClientHttpResponse;
 
-class WireMockInterceptorTest {
+class WMInterceptorTest {
 
   private static HttpRequest simpleRequest(String uri) {
     return new HttpRequest() {
@@ -103,7 +103,7 @@ class WireMockInterceptorTest {
 
     Class<?> adapterCls =
         Class.forName(
-            "net.snytkine.springboot.wiremock_middleware.WMInterceptor$SpringHttpRequestAdapter");
+            "net.snytkine.springboot.wm_interceptor.WMInterceptor$SpringHttpRequestAdapter");
     java.lang.reflect.Constructor<?> ctor =
         adapterCls.getDeclaredConstructor(HttpRequest.class, byte[].class);
     ctor.setAccessible(true);
@@ -136,7 +136,7 @@ class WireMockInterceptorTest {
 
     Class<?> respCls =
         Class.forName(
-            "net.snytkine.springboot.wiremock_middleware.WMInterceptor$WiremockClientHttpResponse");
+            "net.snytkine.springboot.wm_interceptor.WMInterceptor$WiremockClientHttpResponse");
     java.lang.reflect.Constructor<?> ctor = respCls.getDeclaredConstructor(Response.class);
     ctor.setAccessible(true);
     org.springframework.http.client.ClientHttpResponse resp =
@@ -171,7 +171,7 @@ class WireMockInterceptorTest {
 
     Class<?> adapterCls =
         Class.forName(
-            "net.snytkine.springboot.wiremock_middleware.WMInterceptor$SpringHttpRequestAdapter");
+            "net.snytkine.springboot.wm_interceptor.WMInterceptor$SpringHttpRequestAdapter");
     java.lang.reflect.Constructor<?> ctor =
         adapterCls.getDeclaredConstructor(HttpRequest.class, byte[].class);
     ctor.setAccessible(true);
@@ -236,7 +236,7 @@ class WireMockInterceptorTest {
 
     Class<?> adapterCls =
         Class.forName(
-            "net.snytkine.springboot.wiremock_middleware.WMInterceptor$SpringHttpRequestAdapter");
+            "net.snytkine.springboot.wm_interceptor.WMInterceptor$SpringHttpRequestAdapter");
     java.lang.reflect.Constructor<?> ctor =
         adapterCls.getDeclaredConstructor(HttpRequest.class, byte[].class);
     ctor.setAccessible(true);
@@ -284,7 +284,7 @@ class WireMockInterceptorTest {
 
     Class<?> adapterCls =
         Class.forName(
-            "net.snytkine.springboot.wiremock_middleware.WMInterceptor$SpringHttpRequestAdapter");
+            "net.snytkine.springboot.wm_interceptor.WMInterceptor$SpringHttpRequestAdapter");
     java.lang.reflect.Constructor<?> ctor =
         adapterCls.getDeclaredConstructor(HttpRequest.class, byte[].class);
     ctor.setAccessible(true);
@@ -319,7 +319,7 @@ class WireMockInterceptorTest {
 
     Class<?> adapterCls =
         Class.forName(
-            "net.snytkine.springboot.wiremock_middleware.WMInterceptor$SpringHttpRequestAdapter");
+            "net.snytkine.springboot.wm_interceptor.WMInterceptor$SpringHttpRequestAdapter");
     java.lang.reflect.Constructor<?> ctor =
         adapterCls.getDeclaredConstructor(HttpRequest.class, byte[].class);
     ctor.setAccessible(true);
@@ -351,7 +351,7 @@ class WireMockInterceptorTest {
 
     Class<?> respCls =
         Class.forName(
-            "net.snytkine.springboot.wiremock_middleware.WMInterceptor$WiremockClientHttpResponse");
+            "net.snytkine.springboot.wm_interceptor.WMInterceptor$WiremockClientHttpResponse");
     java.lang.reflect.Constructor<?> ctor = respCls.getDeclaredConstructor(Response.class);
     ctor.setAccessible(true);
     org.springframework.http.client.ClientHttpResponse resp =

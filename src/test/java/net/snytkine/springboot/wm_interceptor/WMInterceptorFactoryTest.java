@@ -1,12 +1,12 @@
-package net.snytkine.springboot.wiremock_middleware;
+package net.snytkine.springboot.wm_interceptor;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 import com.github.tomakehurst.wiremock.core.WireMockConfiguration;
-import net.snytkine.springboot.wiremock_middleware.model.WireMockProperties;
+import net.snytkine.springboot.wm_interceptor.model.WireMockProperties;
 import org.junit.jupiter.api.Test;
 
-class WireMockInterceptorFactoryTest {
+class WMInterceptorFactoryTest {
 
   @Test
   void createsInterceptor() {

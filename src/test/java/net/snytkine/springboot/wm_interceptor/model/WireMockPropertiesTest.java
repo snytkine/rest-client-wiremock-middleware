@@ -1,4 +1,4 @@
-package net.snytkine.springboot.wiremock_middleware.model;
+package net.snytkine.springboot.wm_interceptor.model;
 
 import static org.junit.jupiter.api.Assertions.*;
 

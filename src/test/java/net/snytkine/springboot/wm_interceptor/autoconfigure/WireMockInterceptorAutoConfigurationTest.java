@@ -1,11 +1,11 @@
-package net.snytkine.springboot.wiremock_middleware.autoconfigure;
+package net.snytkine.springboot.wm_interceptor.autoconfigure;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import net.snytkine.springboot.wiremock_middleware.WMInterceptor;
-import net.snytkine.springboot.wiremock_middleware.WMInterceptorFactory;
-import net.snytkine.springboot.wiremock_middleware.WireMockConfigurationFactory;
-import net.snytkine.springboot.wiremock_middleware.model.WireMockProperties;
+import net.snytkine.springboot.wm_interceptor.WMInterceptor;
+import net.snytkine.springboot.wm_interceptor.WMInterceptorFactory;
+import net.snytkine.springboot.wm_interceptor.WireMockConfigurationFactory;
+import net.snytkine.springboot.wm_interceptor.model.WireMockProperties;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.autoconfigure.AutoConfigurations;
 import org.springframework.boot.test.context.runner.ApplicationContextRunner;
@@ -16,7 +16,7 @@ class WireMockInterceptorAutoConfigurationTest {
       new ApplicationContextRunner()
           .withConfiguration(
               AutoConfigurations.of(
-                  net.snytkine.springboot.wiremock_middleware.autoconfigure
+                  net.snytkine.springboot.wm_interceptor.autoconfigure
                       .WMInterceptorAutoConfiguration.class));
 
   @Test

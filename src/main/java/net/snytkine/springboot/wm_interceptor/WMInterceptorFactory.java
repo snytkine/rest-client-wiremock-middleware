@@ -1,7 +1,7 @@
-package net.snytkine.springboot.wiremock_middleware;
+package net.snytkine.springboot.wm_interceptor;
 
 import com.github.tomakehurst.wiremock.core.WireMockConfiguration;
-import net.snytkine.springboot.wiremock_middleware.model.WireMockProperties;
+import net.snytkine.springboot.wm_interceptor.model.WireMockProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
@@ -20,8 +20,9 @@ public class WMInterceptorFactory {
    * Creates and configures a WireMockInterceptor bean that handles HTTP request interception and
    * response mocking for integration testing purposes. Bean name will be "wmInterceptor"
    *
-   * @param wireMockProperties the configuration properties for WireMock
-   * @param wireMockConfiguration the WireMock configuration instance
+   * @param wiremockConfiguration the configuration properties for WireMock
+   * @param properties the WireMock properties object containing configuration. the WireMock
+   *     configuration instance
    * @return a configured WireMockInterceptor instance
    */
   public WMInterceptor wmInterceptor(

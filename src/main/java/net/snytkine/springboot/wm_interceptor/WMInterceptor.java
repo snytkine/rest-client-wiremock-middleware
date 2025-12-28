@@ -1,4 +1,4 @@
-package net.snytkine.springboot.wiremock_middleware;
+package net.snytkine.springboot.wm_interceptor;
 
 import com.github.tomakehurst.wiremock.WireMockServer;
 import com.github.tomakehurst.wiremock.core.WireMockConfiguration;
@@ -26,7 +26,7 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
 import lombok.extern.slf4j.Slf4j;
-import net.snytkine.springboot.wiremock_middleware.model.WireMockProperties;
+import net.snytkine.springboot.wm_interceptor.model.WireMockProperties;
 import org.springframework.http.HttpRequest;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.MediaType;
@@ -67,8 +67,10 @@ import org.springframework.web.util.UriComponentsBuilder;
  */
 @Slf4j
 public class WMInterceptor implements ClientHttpRequestInterceptor {
-
+  /** The {@link DirectCallHttpServer} instance that is responsible for handling */
   private final DirectCallHttpServer directCallHttpServer;
+
+  /** The {@link WireMockProperties} instance that contains configuration. */
   private final WireMockProperties properties;
 
   /**
@@ -79,7 +81,8 @@ public class WMInterceptor implements ClientHttpRequestInterceptor {
    * interception and matching against WireMock stubs. It also configures the interceptor with
    * properties such as mock response headers and other configuration options.
    *
-   * @param config the WireMock configuration used to set up the underlying WireMock server
+   * @param wireMockConfiguration the WireMock configuration used to set up the underlying WireMock
+   *     server
    * @param properties the configuration properties for the WireMock interceptor, including mock
    *     response header settings
    * @throws IllegalArgumentException if either {@code config} or {@code properties} is null
